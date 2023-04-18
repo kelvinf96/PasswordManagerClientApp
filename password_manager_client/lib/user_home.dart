@@ -4,7 +4,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:password_manager_client/user_settings.dart';
 
 class UserHomePage extends StatefulWidget {
-  const UserHomePage({super.key, required this.userphone, required this.androidId});
+  const UserHomePage(
+      {super.key, required this.userphone, required this.androidId});
   final String userphone;
   final String? androidId;
 
@@ -13,6 +14,7 @@ class UserHomePage extends StatefulWidget {
 }
 
 class _UserHomePageState extends State<UserHomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,15 +105,15 @@ class _UserHomePageState extends State<UserHomePage> {
         Padding(
           padding: const EdgeInsets.all(10),
           child: GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UserSettingsPage(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => UserSettingsPage(
                           androidId: widget.androidId,
                           phonenumber: widget.userphone,
                         )),
-                  );
+              );
             },
             child: Container(
                 height: 80,
@@ -139,16 +141,6 @@ class _UserHomePageState extends State<UserHomePage> {
                     ))),
           ),
         ),
-        // DONT FORGET TO REMOVE THIS !!
-        const SizedBox(
-            height: 200,
-            child: Padding(
-              padding: EdgeInsets.only(top: 100),
-              child: Text(
-                "Password Manager is powered by Coffee and ElfBar",
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            )),
       ]),
     );
   }
