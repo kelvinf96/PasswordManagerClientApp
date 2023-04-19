@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Update ID
     setState(() {
+      print(result);
       _androidId = result ?? "";
     });
   }
@@ -60,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       account = false;
     } else {
       json = jsonDecode(body);
+      print(json);
       account = true;
     }
 
@@ -131,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
           context,
           MaterialPageRoute(
               builder: (context) => UserHomePage(
-                    androidId: json['phoneid'],
+                    androidId: _androidId,
                     userphone: _userphone.text.trim(),
                   )),
         );
