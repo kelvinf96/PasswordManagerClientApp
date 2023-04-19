@@ -38,7 +38,7 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
         StatusAlert.show(
           context,
           duration: const Duration(seconds: 2),
-          subtitle: "Password added for ${_passwordNameController.text.trim()}",
+          subtitle: response.body,
           configuration: const IconConfiguration(
               icon: Icons.check_circle_rounded, color: Colors.green),
           maxWidth: 250,
