@@ -5,6 +5,7 @@ import 'package:password_manager_client/add_password.dart';
 import 'package:password_manager_client/user_settings.dart';
 
 import 'all_passwords.dart';
+import 'find_password.dart';
 
 class UserHomePage extends StatefulWidget {
   const UserHomePage(
@@ -133,30 +134,41 @@ class _UserHomePageState extends State<UserHomePage> {
         ),
         Padding(
           padding: const EdgeInsets.all(10),
-          child: Container(
-              height: 80,
-              width: 400,
-              decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(.3),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Align(
-                  alignment: Alignment.center,
-                  child: Row(
-                    children: [
-                      Spacer(),
-                      Icon(Icons.search),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: Text("Find a password",
-                            style: TextStyle(
-                              color: Colors.grey[800],
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ),
-                      Spacer(),
-                    ],
-                  ))),
+          child: GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => FindPasswordPage(
+                          androidId: widget.androidId,
+                        )),
+              );
+            },
+            child: Container(
+                height: 80,
+                width: 400,
+                decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(.3),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Row(
+                      children: [
+                        Spacer(),
+                        Icon(Icons.search),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text("Find a password",
+                              style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
+                        Spacer(),
+                      ],
+                    ))),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(10),
