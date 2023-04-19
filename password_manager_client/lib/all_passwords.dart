@@ -33,6 +33,38 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
     });
   }
 
+  void deleteAllPasswords() async {
+    var url =
+        "https://passwordmanagerapiead.azurewebsites.net/PasswordManager/api/Password/remove/all?phoneId=";
+
+    url = url + widget.androidId;
+    var uri = Uri.parse(url);
+    final response = await http.delete(uri);
+
+    setState(() {
+      allPasswords = [];
+    });
+
+    // Show response message in an alert dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete All Passwords?'),
+          content: Text(response.body),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -47,8 +79,7 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
         title: const Text("View All Passwords"),
         backgroundColor: Colors.red[800],
       ),
-      body: 
-      !fetched
+      body: !fetched
           ? const CircularProgressIndicator()
           : ListView.builder(
               itemCount: allPasswords.length,
@@ -63,7 +94,7 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
                       height: 50,
                       child: Row(children: [
                         Padding(
-                          padding: const EdgeInsets.only(left:10),
+                          padding: const EdgeInsets.only(left: 10),
                           child: Text(allPasswords[index]['passwordName']),
                         ),
                         const Spacer(),
@@ -74,6 +105,50 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
                       ])),
                 );
               }),
+      floatingActionButton: allPasswords.length > 0
+          ? FloatingActionButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Delete All Passwords'),
+                      content: const Text(
+                          'Are you sure you want to delete all your passwords? This cannot be undone!'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.red,
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              deleteAllPasswords();
+                            },
+                            child: const Text(
+                              'DELETE ALL',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              tooltip: 'Delete All Passwords',
+              child: const Icon(Icons.delete),
+            )
+          : null,
     );
   }
 }
