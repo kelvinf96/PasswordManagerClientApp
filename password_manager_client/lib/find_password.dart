@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:status_alert/status_alert.dart';
 
 class FindPasswordPage extends StatefulWidget {
   const FindPasswordPage({super.key, required this.androidId});
@@ -25,16 +29,14 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
     final response = await http.get(uri);
     final body = response.body;
 
-    
-
     setState(() {
       if (body.toString() == "${toFind} not found") {
-      errorMessage = "No password found for ${toFind}";
-      passwordSearched = false;
-    } else {
-      passwordSearched = true;
-      _passwordValue = body.toString();
-    }
+        errorMessage = "No password found for ${toFind}";
+        passwordSearched = false;
+      } else {
+        passwordSearched = true;
+        _passwordValue = body.toString();
+      }
     });
   }
 
@@ -127,23 +129,37 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
                             fontWeight: FontWeight.bold, fontSize: 20)))
                 : SizedBox(
                     height: 300,
-                    child:
-                        Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 10, bottom: 10),
-                                child: Text(
+                    child: Column(
+                      children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, bottom: 10),
+                              child: Text(
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                   ),
                                   "Heres your password for ${_passwordName.text.trim()}"),
-                              )),
-                            Text(_passwordValue),
-                          ],
-                        ),
+                            )),
+                        GestureDetector(
+                            onTap: () async {
+                              await Clipboard.setData(
+                                  ClipboardData(text: _passwordValue));
+                                  StatusAlert.show(
+                                    context,
+                                    duration: const Duration(seconds: 2),
+                                    subtitle: "Password for ${_passwordName.text.trim()} copied to clipboard",
+                                    configuration: const IconConfiguration(
+                                    icon: Icons.copy_rounded,
+                                    color: Colors.green),
+                                maxWidth: 250,
+                              );
+                            },
+                            child: Text(_passwordValue)),
+                      ],
+                    ),
                   ),
           ],
         ));
