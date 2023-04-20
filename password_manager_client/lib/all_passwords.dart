@@ -17,6 +17,7 @@ class ViewAllPasswordsPage extends StatefulWidget {
 class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
   bool fetched = false;
   List<dynamic> allPasswords = [];
+  String passwordCount = '';
 
   void fetchAllPasswords() async {
     var url =
@@ -33,6 +34,21 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
 
     setState(() {
       allPasswords = json ?? '';
+      fetched = true;
+    });
+  }
+
+  void fetchAllPasswordsCount() async {
+    var url =
+        "https://passwordmanagerapiead.azurewebsites.net/PasswordManager/api/Password/count?phoneId=";
+
+    url = url + widget.androidId;
+    var uri = Uri.parse(url);
+    final response = await http.get(uri);
+    final count = response.body;
+
+    setState(() {
+      passwordCount = count;
       fetched = true;
     });
   }
@@ -94,6 +110,7 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
   void initState() {
     super.initState();
     fetchAllPasswords();
+    fetchAllPasswordsCount();
   }
 
   @override
@@ -101,7 +118,7 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: const Text("View All Passwords"),
+        title: Text('View All Passwords (${passwordCount})'),
         backgroundColor: Colors.red[800],
       ),
       body: !fetched
