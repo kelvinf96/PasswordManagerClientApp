@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:status_alert/status_alert.dart';
 
 class ViewAllPasswordsPage extends StatefulWidget {
-  const ViewAllPasswordsPage({super.key, required this.androidId});
+  const ViewAllPasswordsPage({Key? key, required this.androidId})
+      : super(key: key);
+
   final androidId;
 
   @override
@@ -65,6 +69,27 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
     );
   }
 
+  void viewPassword(int index) {
+    // Show the password value in an alert dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(allPasswords[index]['passwordName']),
+          content: Text(allPasswords[index]['passwordValue']),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -98,9 +123,68 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
                           child: Text(allPasswords[index]['passwordName']),
                         ),
                         const Spacer(),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: Icon(Icons.remove_red_eye),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title:
+                                      Text(allPasswords[index]['passwordName']),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                          child: Text(
+                                              '${allPasswords[index]['passwordValue']}')),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('OK'),
+                                          ),
+                                          IconButton(
+                                            onPressed: () async {
+                                              await Clipboard.setData(
+                                                  ClipboardData(
+                                                      text: allPasswords[index]
+                                                          ['passwordValue']));
+                                              Navigator.of(context).pop();
+                                              StatusAlert.show(
+                                                context,
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                subtitle:
+                                                    "Password for ${allPasswords[index]['passwordName']} copied to clipboard",
+                                                configuration:
+                                                    const IconConfiguration(
+                                                        icon:
+                                                            Icons.copy_rounded,
+                                                        color: Colors.green),
+                                                maxWidth: 250,
+                                              );
+                                            },
+                                            icon: const Icon(Icons.copy),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Icon(Icons.remove_red_eye),
+                          ),
                         )
                       ])),
                 );
