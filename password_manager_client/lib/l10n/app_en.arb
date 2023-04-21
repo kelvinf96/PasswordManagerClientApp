@@ -1,0 +1,94 @@
+{
+    "language" : "English",
+    "@language" : {
+        "description" : "The current Language"
+    },
+    "welcomeMessage" : "Welcome Back!",
+    "@welcomeMessage" : {
+        "description" : "Welcome message on login"
+    },
+    "findPassoword" : "Find a password",
+    "@findPassoword" : {
+        "description" : "Find user specific password"
+    },
+    "viewAllPasswords" : "View all my passwords",
+    "@viewAllPasswords" : {
+        "description" : "View all user passwords"
+    },
+    "addPassword" : "Add a new password",
+    "@addPassword" : {
+        "description" : "Add a new password"
+    },
+    "userNav" : "User Home Screen",
+    "@userNav" : {
+        "description" : "Message for nav of home"
+    },
+    "accountHomeMessage" : "This is the account home for ",
+    "@accountHomeMessage" : {
+        "description" : "Message for toop of account home"
+    },
+    "account" : "Account Settings",
+    "@account" : {
+        "description" : "Account settings page"
+    },
+    "addPasswordMessage" : "Let's add a new password",
+    "@addPasswordMessage" : {
+        "description" : "Message at top of add new password page"
+    },
+    "addPasswordName" : "What is your password for?",
+    "@addPasswordName" : {
+        "description" : "Name of the new password"
+    },
+    "addPasswordValue" : "What is your password?",
+    "@addPasswordValue" : {
+        "description" : "Value of the new password"
+    },
+    "submitButton" : "Submit",
+    "@submitButton" : {
+        "description" : "Text for submit button"
+    },
+    "passwordManagerTitle" : "Password Manager",
+    "@passwordManagerTitle" : {
+        "description" : "Title for application"
+    },
+    "appWelcomeMessage" : "Welcome to Password Manager",
+    "@appWelcomeMessage" : {
+        "description" : "Welocme message for application"
+    },
+    "enterNumberMessage" : "Please enter your number to proceed",
+    "@enterNumberMessage" : {
+        "description" : "Text to ask user for number"
+    },
+    "numberHintText" : "Enter your phone number..",
+    "@numberHintText" : {
+        "description" : "Hint text for number input"
+    },
+    "homeProceed" : "Proceed",
+    "@homeProceed" : {
+        "description" : "Text for proceed button"
+    },
+    "searchPasswords" : "Search your passwords",
+    "@searchPasswords" : {
+        "description" : "Search your passwords for password"
+    },
+    "passwordNameTag" : "Enter the password name",
+    "@passwordNameTag" : {
+        "description" : "Prompt for password name"
+    },
+    "userSettingsTitle" : "User Settings",
+    "@userSettingsTitel" : {
+        "description" : "Title for user settings"
+    },
+    "yourSettings" : "Your Account Settings",
+    "@yourSettings" : {
+        "description" : "Title for your account settings"
+    },
+    "phoneNumTag" : "Phone Number",
+    "@yphoneNumTag" : {
+        "description" : "Phone number text"
+    },
+    "deviceId" : "Registered Device ID",
+    "@deviceId" : {
+        "description" : "Text for device Id"
+    }
+}

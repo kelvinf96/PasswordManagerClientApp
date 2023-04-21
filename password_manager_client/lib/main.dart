@@ -1,10 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:password_manager_client/local_provider.dart';
 import 'package:password_manager_client/user_home.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:http/http.dart' as http;
 import 'package:status_alert/status_alert.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:password_manager_client/local_provider.dart';
+import 'package:provider/provider.dart';
+
+import 'l10n/l10n.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +20,25 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Password Manager',
-      home: MyHomePage(title: 'Password Manager'),
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => LocaleProvider(),
+      builder: (context, child) {
+        {
+          final provider = Provider.of<LocaleProvider>(context);
+          return MaterialApp(
+            supportedLocales: L10n.all,
+            // locale: provider.locale,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            title: 'Password Manager',
+            home: MyHomePage(title: 'Password Manager'),
+          );
+        }
+      });
 }
 
 class MyHomePage extends StatefulWidget {
@@ -209,21 +229,38 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.red[800],
-        title: Align(alignment: Alignment.center, child: Text(widget.title)),
+        title: Align(
+            alignment: Alignment.center,
+            child: Text(AppLocalizations.of(context)!.passwordManagerTitle)),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // DropdownButton(
+            //     icon: Container(width: 10),
+            //     items: L10n.all.map((locale) {
+            //       final flag = L10n.getFlag(locale.languageCode);
+
+            //       return DropdownMenuItem(
+            //         child: Center(
+            //           child: Text(
+            //             flag,
+            //             style: TextStyle(fontSize: 24),
+            //           )
+            //         ),
+                  
+            //       )
+            //     }), onChanged: (value) {  },),
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: SizedBox(
                 height: 50,
                 child: Text(
-                  "Welcome to Password Manager",
+                  AppLocalizations.of(context)!.appWelcomeMessage,
                   style: TextStyle(
                     color: Colors.red[800],
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -236,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
-                    "Please enter your number to proceed",
+                    AppLocalizations.of(context)!.enterNumberMessage,
                     style: TextStyle(
                       color: Colors.grey[800],
                       fontSize: 16,
@@ -255,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Enter your phone number..',
+                    hintText: "089615...",
                   ),
                 ),
               ),
@@ -272,11 +309,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   decoration: BoxDecoration(
                       color: Colors.red[400],
                       borderRadius: BorderRadius.circular(20)),
-                  child: const Align(
+                  child: Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "Proceed",
-                        style: TextStyle(
+                        AppLocalizations.of(context)!.homeProceed,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

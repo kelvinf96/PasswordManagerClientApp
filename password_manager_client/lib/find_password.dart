@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:status_alert/status_alert.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FindPasswordPage extends StatefulWidget {
   const FindPasswordPage({super.key, required this.androidId});
@@ -18,7 +19,7 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
   TextEditingController _passwordName = TextEditingController();
   bool passwordSearched = false;
   late String _passwordValue;
-  String errorMessage = "Your password will show here";
+  late String errorMessage = AppLocalizations.of(context)!.searchPasswords;
 
   void findPassword() async {
     var toFind = _passwordName.text.trim();
@@ -46,7 +47,7 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
-          title: const Text("Find a password"),
+          title: Text(AppLocalizations.of(context)!.findPassoword),
           backgroundColor: Colors.red[800],
         ),
         body: Column(
@@ -57,23 +58,23 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: Text("Search your passwords",
+                      child: Text(AppLocalizations.of(context)!.searchPasswords,
                           style: TextStyle(
                             color: Colors.red[800],
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
                           )),
                     ))),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 10, bottom: 5),
               child: SizedBox(
                   height: 30,
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
-                        "Enter the password name"),
+                        AppLocalizations.of(context)!.passwordNameTag,),
                   )),
             ),
             Padding(

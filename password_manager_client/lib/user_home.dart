@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:password_manager_client/add_password.dart';
 import 'package:password_manager_client/user_settings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'all_passwords.dart';
 import 'find_password.dart';
@@ -24,7 +25,9 @@ class _UserHomePageState extends State<UserHomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text("User Home Screen"),
+        title:  Text(
+          AppLocalizations.of(context)!.userNav,
+        ),
         backgroundColor: Colors.red[800],
       ),
       body: Column(children: [
@@ -34,7 +37,8 @@ class _UserHomePageState extends State<UserHomePage> {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10),
-                  child: Text("Welcome back!",
+                  child: Text(
+                      AppLocalizations.of(context)!.welcomeMessage,
                       style: TextStyle(
                           color: Colors.red[800],
                           fontWeight: FontWeight.bold,
@@ -46,7 +50,7 @@ class _UserHomePageState extends State<UserHomePage> {
               alignment: Alignment.topLeft,
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: Text("This is the account home for ${widget.userphone}",
+                child: Text(AppLocalizations.of(context)!.accountHomeMessage + widget.userphone,
                     style: TextStyle(
                       color: Colors.grey[800],
                       fontSize: 16,
@@ -82,7 +86,8 @@ class _UserHomePageState extends State<UserHomePage> {
                         Icon(Icons.add),
                         Padding(
                           padding: const EdgeInsets.only(left: 5),
-                          child: Text("Add a new password",
+                          child: Text(
+                              AppLocalizations.of(context)!.addPassword,
                               style: TextStyle(
                                 color: Colors.grey[800],
                                 fontSize: 18,
@@ -120,7 +125,8 @@ class _UserHomePageState extends State<UserHomePage> {
                         Icon(Icons.storage),
                         Padding(
                           padding: const EdgeInsets.only(left: 5),
-                          child: Text("View all my passwords",
+                          child: Text(
+                              AppLocalizations.of(context)!.viewAllPasswords,
                               style: TextStyle(
                                 color: Colors.grey[800],
                                 fontSize: 18,
@@ -158,7 +164,8 @@ class _UserHomePageState extends State<UserHomePage> {
                         Icon(Icons.search),
                         Padding(
                           padding: const EdgeInsets.only(left: 5),
-                          child: Text("Find a password",
+                          child: Text(
+                              AppLocalizations.of(context)!.findPassoword,
                               style: TextStyle(
                                 color: Colors.grey[800],
                                 fontSize: 18,
@@ -197,7 +204,8 @@ class _UserHomePageState extends State<UserHomePage> {
                         Icon(Icons.settings),
                         Padding(
                           padding: const EdgeInsets.only(left: 5),
-                          child: Text("Account Settings",
+                          child: Text(
+                              AppLocalizations.of(context)!.account,
                               style: TextStyle(
                                 color: Colors.grey[800],
                                 fontSize: 18,

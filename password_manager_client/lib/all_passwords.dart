@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:status_alert/status_alert.dart';
+
 
 class ViewAllPasswordsPage extends StatefulWidget {
   const ViewAllPasswordsPage({Key? key, required this.androidId})
@@ -118,7 +120,7 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text('View All Passwords (${passwordCount})'),
+        title: Text(AppLocalizations.of(context)!.viewAllPasswords,),
         backgroundColor: Colors.red[800],
       ),
       body: !fetched
