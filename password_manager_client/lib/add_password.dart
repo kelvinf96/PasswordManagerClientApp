@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:password_manager_client/user_home.dart';
 import 'package:status_alert/status_alert.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddUserPasswordPage extends StatefulWidget {
   const AddUserPasswordPage(
@@ -61,18 +62,19 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
-          title: const Text("Add New Password"),
+          title: Text(
+            AppLocalizations.of(context)!.addPassword,),
           backgroundColor: Colors.red[800],
         ),
         body: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 80,
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Let's add a new password",
-                    style: TextStyle(
-                      fontSize: 26,
+                child: Text(AppLocalizations.of(context)!.addPasswordMessage,
+                    style: const TextStyle(
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     )),
               ),
@@ -100,8 +102,8 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Container(
-                            child: const Text("What is your password for?",
-                                style: TextStyle(
+                            child: Text(AppLocalizations.of(context)!.addPasswordName,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                 ))),
@@ -145,8 +147,8 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Container(
-                            child: const Text("What is your password?",
-                                style: TextStyle(
+                            child: Text(AppLocalizations.of(context)!.addPasswordValue,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                 ))),
@@ -178,10 +180,10 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
                   decoration: BoxDecoration(
                       color: Colors.green[200],
                       borderRadius: BorderRadius.circular(20)),
-                  child: const Align(
+                  child: Align(
                       alignment: Alignment.center,
-                      child: Text("Submit",
-                          style: TextStyle(
+                      child: Text(AppLocalizations.of(context)!.submitButton,
+                          style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           )))),
