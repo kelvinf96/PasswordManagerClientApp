@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, prefer_final_fields, prefer_typing_uninitialized_variables
 
 import 'dart:convert';
-
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -51,8 +50,6 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
       }
     });
   }
-
-  
 
   void deletePassword() async {
     var toDelete = _passwordName.text.trim();
