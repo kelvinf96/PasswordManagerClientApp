@@ -147,6 +147,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 MaterialPageRoute(
                     builder: (context) => FindPasswordPage(
                           androidId: widget.androidId,
+                          phonenum: widget.userphone,
                         )),
               );
             },
