@@ -11,9 +11,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FindPasswordPage extends StatefulWidget {
   const FindPasswordPage(
-      {super.key, required this.androidId, required this.phonenum});
+      {super.key, required this.androidId});
   final androidId;
-  final phonenum;
+ 
 
   @override
   State<FindPasswordPage> createState() => _FindPasswordPageState();
@@ -81,7 +81,7 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
             MaterialPageRoute(
                 builder: (_) => UserHomePage(
                       androidId: widget.androidId,
-                      userphone: widget.phonenum,
+                      
                     )),
             (route) => false);
       } else
@@ -119,7 +119,7 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
             MaterialPageRoute(
                 builder: (_) => UserHomePage(
                       androidId: widget.androidId,
-                      userphone: widget.phonenum,
+                      
                     )),
             (route) => false);
       } else
