@@ -4,9 +4,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserSettingsPage extends StatefulWidget {
-  const UserSettingsPage({super.key, required this.androidId, required this.phonenumber});
+  const UserSettingsPage({super.key, required this.androidId});
   final String? androidId;
-  final String phonenumber;
+  
 
   @override
   State<UserSettingsPage> createState() => _UserSettingsPageState();
@@ -37,24 +37,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                     )
                   )
             ),
-            SizedBox(
-              height: 30,
-              child: Text(
-                AppLocalizations.of(context)!.phoneNumTag,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ))
-            ),
-            SizedBox(
-              height: 20,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left:10),
-                  child: Text("${widget.phonenumber}"),
-                ))
-            ),
+            
             SizedBox(
               height: 30,
               child: Text(

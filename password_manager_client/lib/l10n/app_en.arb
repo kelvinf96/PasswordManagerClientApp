@@ -90,5 +90,10 @@
     "deviceId" : "Registered Device ID",
     "@deviceId" : {
         "description" : "Text for device Id"
+    },
+    "correctDeviceMessage" : "Please ensure you are on the correct device.",
+    "@correctDeviceMessage" : {
+        "description" : "Message to ensure user logs in on correct device"
     }
+
 }

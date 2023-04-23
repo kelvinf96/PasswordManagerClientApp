@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
           MaterialPageRoute(
               builder: (context) => UserHomePage(
                     androidId: _androidId,
-                    userphone: _userphone.text.trim(),
+                    
                   )),
         );
       }
@@ -266,36 +266,44 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+            // SizedBox(
+            //   height: 30,
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Padding(
+            //       padding: const EdgeInsets.only(left: 10),
+            //       child: Text(
+            //         AppLocalizations.of(context)!.enterNumberMessage,
+            //         style: TextStyle(
+            //           color: Colors.grey[800],
+            //           fontSize: 16,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 80,
+            //   child: Padding(
+            //     padding: EdgeInsets.all(10),
+            //     child: TextField(
+            //       controller: _userphone,
+            //       keyboardType: TextInputType.number,
+            //       decoration: const InputDecoration(
+            //         border: OutlineInputBorder(),
+            //         hintText: "089615...",
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SizedBox(
-              height: 30,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    AppLocalizations.of(context)!.enterNumberMessage,
-                    style: TextStyle(
-                      color: Colors.grey[800],
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 80,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  controller: _userphone,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "089615...",
-                  ),
-                ),
-              ),
+              height: 50,
+              child: Text(
+                AppLocalizations.of(context)!.correctDeviceMessage,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                )),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10),

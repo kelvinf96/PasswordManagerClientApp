@@ -21,5 +21,6 @@
     "userSettingsTitle" : "Ajustes de usuario",
     "yourSettings" : "Configuración de su cuenta",
     "phoneNumTag" : "Número de teléfono",
-    "deviceId" : "ID de dispositivo registrado"
+    "deviceId" : "ID de dispositivo registrado",
+    "correctDeviceMessage" : "Asegúrate de estar en el dispositivo correcto."
 }

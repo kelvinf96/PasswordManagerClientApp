@@ -10,8 +10,8 @@ import 'find_password.dart';
 
 class UserHomePage extends StatefulWidget {
   const UserHomePage(
-      {super.key, required this.userphone, required this.androidId});
-  final String userphone;
+      {super.key, required this.androidId});
+  
   final String? androidId;
 
   @override
@@ -42,21 +42,7 @@ class _UserHomePageState extends State<UserHomePage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 30)),
                 ))),
-        SizedBox(
-            height: 50,
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                    AppLocalizations.of(context)!.accountHomeMessage +
-                        widget.userphone,
-                    style: TextStyle(
-                      color: Colors.grey[800],
-                      fontSize: 16,
-                    )),
-              ),
-            )),
+       
         Padding(
           padding: const EdgeInsets.all(10),
           child: GestureDetector(
@@ -66,7 +52,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 MaterialPageRoute(
                     builder: (context) => AddUserPasswordPage(
                           androidId: widget.androidId,
-                          phonenum: widget.userphone,
+                          
                         )),
               );
             },
@@ -144,7 +130,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 MaterialPageRoute(
                     builder: (context) => FindPasswordPage(
                           androidId: widget.androidId,
-                          phonenum: widget.userphone,
+                          
                         )),
               );
             },
@@ -184,7 +170,6 @@ class _UserHomePageState extends State<UserHomePage> {
                 MaterialPageRoute(
                     builder: (context) => UserSettingsPage(
                           androidId: widget.androidId,
-                          phonenumber: widget.userphone,
                         )),
               );
             },
