@@ -5,10 +5,10 @@ import 'package:http/http.dart';
 import 'package:password_manager_client/user_home.dart';
 import 'package:status_alert/status_alert.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart' as http;
 
 class AddUserPasswordPage extends StatefulWidget {
-  const AddUserPasswordPage(
-      {super.key, required this.androidId});
+  const AddUserPasswordPage({super.key, required this.androidId});
 
   final androidId;
 
@@ -20,14 +20,14 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
   TextEditingController _passwordNameController = TextEditingController();
   TextEditingController _passwordValueController = TextEditingController();
 
-  void addPassword() async {
+  void addPassword(var androidid, var passname, var passval) async {
     var uri = Uri.parse(
-        "https://passwordmanagerapiead.azurewebsites.net/PasswordManager/api/Password/add?phoneId=${widget.androidId}&passwordName=${_passwordNameController.text.trim()}&passwordValue=${_passwordValueController.text.trim()}");
+        "https://passwordmanagerapiead.azurewebsites.net/PasswordManager/api/Password/add?phoneId=$androidid&passwordName=$passname&passwordValue=$passval");
 
     final headers = {'Content-Type': 'application/json'};
     final encoding = Encoding.getByName('utf-8');
 
-    Response response = await post(
+    http.Response response = await post(
       uri,
       headers: headers,
       encoding: encoding,
@@ -48,7 +48,6 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
             MaterialPageRoute(
                 builder: (_) => UserHomePage(
                       androidId: widget.androidId,
-                      
                     )),
             (route) => false);
       });
@@ -62,7 +61,8 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
           title: Text(
-            AppLocalizations.of(context)!.addPassword,),
+            AppLocalizations.of(context)?.addPassword ?? "Add a password",
+          ),
           backgroundColor: Colors.red[800],
         ),
         body: Column(
@@ -71,7 +71,9 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
               height: 80,
               child: Align(
                 alignment: Alignment.center,
-                child: Text(AppLocalizations.of(context)!.addPasswordMessage,
+                child: Text(
+                    AppLocalizations.of(context)?.addPasswordMessage ??
+                        "Let's add a new password",
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -101,7 +103,9 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Container(
-                            child: Text(AppLocalizations.of(context)!.addPasswordName,
+                            child: Text(
+                                AppLocalizations.of(context)?.addPasswordName ??
+                                    "What is the password for?",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -146,7 +150,10 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Container(
-                            child: Text(AppLocalizations.of(context)!.addPasswordValue,
+                            child: Text(
+                                AppLocalizations.of(context)
+                                        ?.addPasswordValue ??
+                                    "What is the password?",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -171,7 +178,11 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
             GestureDetector(
               onTap: () {
                 // some validation here first
-                addPassword();
+                addPassword(
+                  widget.androidId,
+                  _passwordNameController.text.trim(),
+                  _passwordValueController.text.trim()
+                );
               },
               child: Container(
                   height: 60,
@@ -181,7 +192,9 @@ class _AddUserPasswordPageState extends State<AddUserPasswordPage> {
                       borderRadius: BorderRadius.circular(20)),
                   child: Align(
                       alignment: Alignment.center,
-                      child: Text(AppLocalizations.of(context)!.submitButton,
+                      child: Text(
+                          AppLocalizations.of(context)?.submitButton ??
+                              "Submit",
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,

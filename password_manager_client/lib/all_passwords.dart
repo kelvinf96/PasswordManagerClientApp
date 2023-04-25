@@ -188,176 +188,181 @@ class _ViewAllPasswordsPageState extends State<ViewAllPasswordsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.viewAllPasswords,
-        ),
-        backgroundColor: Colors.red[800],
-      ),
-      body: !fetched
-          ? const CircularProgressIndicator()
-          : ListView.builder(
-              itemCount: allPasswords.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-                      height: 50,
-                      child: Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(allPasswords[index]['passwordName']),
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            currentPasswordName =
-                                allPasswords[index]['passwordName'];
-                            _newpasswordName.text = currentPasswordName;
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: TextFormField(
-                                    controller: _newpasswordName,
-                                    decoration: const InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: Colors.grey),
-                                      ),
-                                    ),
-                                  ),
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Center(
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                                '${allPasswords[index]['passwordValue']}'),
-                                            Spacer(),
-                                            IconButton(
-                                              onPressed: () async {
-                                                await Clipboard.setData(
-                                                  ClipboardData(
-                                                    text:
-                                                        '${allPasswords[index]['passwordValue']}',
-                                                  ),
-                                                );
-                                                StatusAlert.show(
-                                                  context,
-                                                  duration: const Duration(
-                                                      seconds: 2),
-                                                  subtitle:
-                                                      "Password for ${allPasswords[index]['passwordName']} copied to clipboard",
-                                                  configuration:
-                                                      const IconConfiguration(
-                                                          icon: Icons
-                                                              .copy_rounded,
-                                                          color: Colors.green),
-                                                  maxWidth: 250,
-                                                );
-                                              },
-                                              icon: const Icon(Icons.copy),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text('OK'),
-                                          ),
-                                          Spacer(),
-                                          GestureDetector(
-                                              onTap: () {
-                                                updatePasswordName(
-                                                  index,
-                                                  _newpasswordName.text.trim(),
-                                                );
-                                              },
-                                              child: Icon(Icons.save_as_rounded,
-                                                  color: Colors.green)),
-                                          Spacer(),
-                                          GestureDetector(
-                                              onTap: () {
-                                                deletePassword(index);
-                                              },
-                                              child: const Icon(
-                                                  Icons.delete_rounded,
-                                                  color: Colors.red)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.only(right: 10),
-                            child: Icon(Icons.remove_red_eye),
-                          ),
-                        )
-                      ])),
-                );
-              }),
-      floatingActionButton: allPasswords.length > 0
-          ? FloatingActionButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Delete All Passwords'),
-                      content: const Text(
-                          'Are you sure you want to delete all your passwords? This cannot be undone!'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Cancel'),
-                        ),
-                        Container(
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: MaterialApp(
+        home: Scaffold(
+          backgroundColor: Colors.grey[100],
+          appBar: AppBar(
+            title: Text(
+              AppLocalizations.of(context)?.viewAllPasswords ?? "View all passwords",
+            ),
+            backgroundColor: Colors.red[800],
+          ),
+          body: !fetched
+              ? const CircularProgressIndicator()
+              : ListView.builder(
+                  itemCount: allPasswords.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.red,
+                            color: Colors.white,
                           ),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              deleteAllPasswords();
-                            },
-                            child: const Text(
-                              'DELETE ALL',
-                              style: TextStyle(
-                                color: Colors.white,
+                          height: 50,
+                          child: Row(children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(allPasswords[index]['passwordName']),
+                            ),
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                currentPasswordName =
+                                    allPasswords[index]['passwordName'];
+                                _newpasswordName.text = currentPasswordName;
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: TextFormField(
+                                        controller: _newpasswordName,
+                                        decoration: const InputDecoration(
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 1, color: Colors.grey),
+                                          ),
+                                        ),
+                                      ),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Center(
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                    '${allPasswords[index]['passwordValue']}'),
+                                                Spacer(),
+                                                IconButton(
+                                                  onPressed: () async {
+                                                    await Clipboard.setData(
+                                                      ClipboardData(
+                                                        text:
+                                                            '${allPasswords[index]['passwordValue']}',
+                                                      ),
+                                                    );
+                                                    StatusAlert.show(
+                                                      context,
+                                                      duration: const Duration(
+                                                          seconds: 2),
+                                                      subtitle:
+                                                          "Password for ${allPasswords[index]['passwordName']} copied to clipboard",
+                                                      configuration:
+                                                          const IconConfiguration(
+                                                              icon: Icons
+                                                                  .copy_rounded,
+                                                              color: Colors.green),
+                                                      maxWidth: 250,
+                                                    );
+                                                  },
+                                                  icon: const Icon(Icons.copy),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Row(
+                                            children: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text('OK'),
+                                              ),
+                                              Spacer(),
+                                              GestureDetector(
+                                                  onTap: () {
+                                                    updatePasswordName(
+                                                      index,
+                                                      _newpasswordName.text.trim(),
+                                                    );
+                                                  },
+                                                  child: Icon(Icons.save_as_rounded,
+                                                      color: Colors.green)),
+                                              Spacer(),
+                                              GestureDetector(
+                                                  onTap: () {
+                                                    deletePassword(index);
+                                                  },
+                                                  child: const Icon(
+                                                      Icons.delete_rounded,
+                                                      color: Colors.red)),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.only(right: 10),
+                                child: Icon(Icons.remove_red_eye),
+                              ),
+                            )
+                          ])),
+                    );
+                  }),
+          floatingActionButton: allPasswords.length > 0
+              ? FloatingActionButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Delete All Passwords'),
+                          content: const Text(
+                              'Are you sure you want to delete all your passwords? This cannot be undone!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.red,
+                              ),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  deleteAllPasswords();
+                                },
+                                child: const Text(
+                                  'DELETE ALL',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
+                          ],
+                        );
+                      },
                     );
                   },
-                );
-              },
-              tooltip: 'Delete All Passwords',
-              child: const Icon(Icons.delete),
-            )
-          : null,
+                  tooltip: 'Delete All Passwords',
+                  child: const Icon(Icons.delete),
+                )
+              : null,
+        ),
+      ),
     );
   }
 }
