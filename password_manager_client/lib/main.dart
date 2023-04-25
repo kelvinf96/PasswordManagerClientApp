@@ -225,112 +225,117 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        backgroundColor: Colors.red[800],
-        title: Align(
-            alignment: Alignment.center,
-            child: Text(AppLocalizations.of(context)!.passwordManagerTitle)),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // DropdownButton(
-            //     icon: Container(width: 10),
-            //     items: L10n.all.map((locale) {
-            //       final flag = L10n.getFlag(locale.languageCode);
-
-            //       return DropdownMenuItem(
-            //         child: Center(
-            //           child: Text(
-            //             flag,
-            //             style: TextStyle(fontSize: 24),
-            //           )
-            //         ),
-                  
-            //       )
-            //     }), onChanged: (value) {  },),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: SizedBox(
-                height: 50,
-                child: Text(
-                  AppLocalizations.of(context)!.appWelcomeMessage,
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: MaterialApp(
+        home: Scaffold(
+          backgroundColor: Colors.grey[200],
+          appBar: AppBar(
+            backgroundColor: Colors.red[800],
+            title: Align(
+                alignment: Alignment.center,
+                child: Text(AppLocalizations.of(context)?.passwordManagerTitle ?? "Password Manager")),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // DropdownButton(
+                //     icon: Container(width: 10),
+                //     items: L10n.all.map((locale) {
+                //       final flag = L10n.getFlag(locale.languageCode);
+      
+                //       return DropdownMenuItem(
+                //         child: Center(
+                //           child: Text(
+                //             flag,
+                //             style: TextStyle(fontSize: 24),
+                //           )
+                //         ),
+                      
+                //       )
+                //     }), onChanged: (value) {  },),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: SizedBox(
+                    height: 50,
+                    child: Text(
+                      AppLocalizations.of(context)?.appWelcomeMessage ?? "Welcome to Password Manager",
+                      style: TextStyle(
+                        color: Colors.red[800],
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            // SizedBox(
-            //   height: 30,
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Padding(
-            //       padding: const EdgeInsets.only(left: 10),
-            //       child: Text(
-            //         AppLocalizations.of(context)!.enterNumberMessage,
-            //         style: TextStyle(
-            //           color: Colors.grey[800],
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.bold,
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 80,
-            //   child: Padding(
-            //     padding: EdgeInsets.all(10),
-            //     child: TextField(
-            //       controller: _userphone,
-            //       keyboardType: TextInputType.number,
-            //       decoration: const InputDecoration(
-            //         border: OutlineInputBorder(),
-            //         hintText: "089615...",
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            SizedBox(
-              height: 50,
-              child: Text(
-                AppLocalizations.of(context)!.correctDeviceMessage,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
-                )),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: GestureDetector(
-                onTap: () {
-                  userLogin();
-                },
-                child: Container(
+                // SizedBox(
+                //   height: 30,
+                //   child: Align(
+                //     alignment: Alignment.centerLeft,
+                //     child: Padding(
+                //       padding: const EdgeInsets.only(left: 10),
+                //       child: Text(
+                //         AppLocalizations.of(context)!.enterNumberMessage,
+                //         style: TextStyle(
+                //           color: Colors.grey[800],
+                //           fontSize: 16,
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 80,
+                //   child: Padding(
+                //     padding: EdgeInsets.all(10),
+                //     child: TextField(
+                //       controller: _userphone,
+                //       keyboardType: TextInputType.number,
+                //       decoration: const InputDecoration(
+                //         border: OutlineInputBorder(),
+                //         hintText: "089615...",
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                SizedBox(
                   height: 50,
-                  width: 300,
-                  decoration: BoxDecoration(
-                      color: Colors.red[400],
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        AppLocalizations.of(context)!.homeProceed,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
+                  child: Text(
+                    AppLocalizations.of(context)?.correctDeviceMessage ?? "Ensure you are on the correct device",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
+                    )),
                 ),
-              ),
-            )
-          ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      userLogin();
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 300,
+                      decoration: BoxDecoration(
+                          color: Colors.red[400],
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            AppLocalizations.of(context)?.homeProceed ?? "Proceed",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
